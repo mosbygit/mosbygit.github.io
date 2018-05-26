@@ -70,7 +70,11 @@ aside();
 if(environment) {
 	conent();
 }
-$(window).on('hashchange', conent);
+$(window).on('hashchange', function() {
+	if(window.location.hash.substr(1)!="#") {
+		conent();
+	}
+});
 //目录初始化
 function asideCatalogue () {
 	//初始化一级菜单
