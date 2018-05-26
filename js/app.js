@@ -76,7 +76,7 @@ function linkData() {
 	var hash = window.location.hash;
 	if(hash && hash.substr(1)!="#") {
 		conent();
-		if(!environment) {
+		if(!environment && !$("#full").hasClass('hide')) {
 	   		$('#full').trigger("click");
 		}
 	}
