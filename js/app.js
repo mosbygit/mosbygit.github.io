@@ -71,7 +71,8 @@ if(environment) {
 	conent();
 }
 $(window).on('hashchange', function() {
-	if(window.location.hash.substr(1)!="#") {
+	var hash = window.location.hash;
+	if(hash && hash.substr(1)!="#") {
 		conent();
 	}
 });
