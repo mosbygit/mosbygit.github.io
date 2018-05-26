@@ -58,9 +58,9 @@ function conent() {
 	   	});
 	   	articleDirectories();
 
-   		if(!environment) {
-	   		$('#full').trigger("click");
-	   	}
+// 		if(!environment) {
+//	   		$('#full').trigger("click");
+//	   	}
 
 	}, "text").fail(function(){
 		alert("数据获取失败");
@@ -70,12 +70,17 @@ aside();
 if(environment) {
 	conent();
 }
-$(window).on('hashchange', function() {
+$(window).on('hashchange', linkData);
+//判断是否该跳转
+function linkData() {
 	var hash = window.location.hash;
 	if(hash && hash.substr(1)!="#") {
 		conent();
+		if(!environment) {
+	   		$('#full').trigger("click");
+		}
 	}
-});
+}
 //目录初始化
 function asideCatalogue () {
 	//初始化一级菜单
@@ -88,6 +93,9 @@ function asideCatalogue () {
 		e.preventDefault();
 		$("#aside ol ul").hide();//影藏所有二级目录
 	})
+	if(!environment) {
+	   	$("#aside ul li a").click(linkData)
+	}
 }
 
 function articleDirectories() {
@@ -150,7 +158,8 @@ function topScreen() {
 topScreen();
 //初始化上一篇，下一篇
 function prev() {
-	$('#prev').click(function() {
+	$('#prev').click(function(e) {
+		e.preventDefault();
 		var hash = getHash();
 		for(var i = 0, len = mun.length; i < len; i++) {
 			if(mun[i] == hash) {
@@ -164,11 +173,12 @@ function prev() {
 	})
 }
 function next() {
-	$('#next').click(function() {
+	$('#next').click(function(e) {
+		e.preventDefault();
 		var hash = getHash();
 		for(var i = 0, len = mun.length; i < len; i++) {
 			if(mun[i] == hash) {
-				if(i < len) {
+				if(i < len-1) {
 					location.hash="#" + mun[i+1];
 					return;
 				}				
