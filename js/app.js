@@ -7,6 +7,7 @@ function isPC () {
 	}
 }
 var environment = isPC();
+var mun = [];
 //差异化设置
 function differentiation () {
 	if (isPC()) {//pc端
@@ -30,6 +31,14 @@ function aside() {
 		$('#aside code').map(function() {
 	    	Prism.highlightElement(this);
 	   	});
+	   	$("#aside li a").map(function() {
+	   		var hash = $(this).attr('href');
+			if(hash && hash.substr(1)) {
+				mun.push(hash.substr(1));
+			}
+	   	});
+	   	prev();
+	   	next();
 	}, "text").fail(function(){
 		alert("数据获取失败");
 	})
@@ -48,23 +57,29 @@ function conent() {
 	    	Prism.highlightElement(this);
 	   	});
 	   	articleDirectories();
+
+   		if(!environment) {
+	   		$('#full').trigger("click");
+	   	}
+
 	}, "text").fail(function(){
 		alert("数据获取失败");
 	})
 }
 aside();
-conent();
+if(environment) {
+	conent();
+}
 $(window).on('hashchange', conent);
 //目录初始化
 function asideCatalogue () {
 	//初始化一级菜单
 	$("#aside ol ul").hide();//影藏所有二级目录
-	$("#aside ol>li>a").click(function(e){
-		e.preventDefault();
+	$("#aside ol>li>a").click(function(){
 		$(this).next().toggle(300);//二级目录切换隐藏
 	});
 	//初始化目录选项
-	$("#aside h2").click(function(){
+	$("#aside h2").click(function(e){
 		e.preventDefault();
 		$("#aside ol ul").hide();//影藏所有二级目录
 	})
@@ -81,7 +96,7 @@ function articleDirectories() {
 			}, 300);
 		})
 	})
-	var ul_tag = $("<ol id='content-toc' class='content-toc'></ol>").insertAfter('#content h1');
+	var ul_tag = $("<ol id='content-top' class='content-top'></ol>").insertAfter('#content h1');
 	$('#content h2').map(function(index) {
 		var self = this;
 		$(this).attr('id', "h2" + "and" + index + "link");
@@ -128,3 +143,33 @@ function topScreen() {
 	})
 }
 topScreen();
+//初始化上一篇，下一篇
+function prev() {
+	$('#prev').click(function() {
+		var hash = getHash();
+		for(var i = 0, len = mun.length; i < len; i++) {
+			if(mun[i] == hash) {
+				if(i) {
+					location.hash="#" + mun[i-1];
+					return;
+				}				
+			}
+		}
+		alert("没有前面一个了")
+	})
+}
+function next() {
+	$('#next').click(function() {
+		var hash = getHash();
+		for(var i = 0, len = mun.length; i < len; i++) {
+			if(mun[i] == hash) {
+				if(i < len) {
+					location.hash="#" + mun[i+1];
+					return;
+				}				
+			}
+		}
+		alert("没有后面一个了")
+	})
+}
+

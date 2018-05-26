@@ -1,3 +1,4 @@
+/*全局样式修改*/
 html,body{
 	margin: 0;
 	padding: 0;
@@ -17,6 +18,7 @@ li ul{
 	list-style-type: none;
 	padding-left: 0;
 }
+/*高亮样式优化*/
 #content p code, #content li>code, #content h2>code, #content h3>code{
 	padding-left: 3px;
     padding-right: 3px;
@@ -27,6 +29,7 @@ li ul{
 	border-radius: 5px;
 	border: 2px solid #708090;
 }
+/*侧边栏样式*/
 #aside{
 	padding: 20px;
 	overflow-x: hidden;
@@ -45,6 +48,7 @@ li ul{
 	right: 0;
 	bottom: 40px;
 }
+/*内容区样式*/
 #content{
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -61,6 +65,7 @@ li ul{
 	padding: 20px;
 	bottom: 40px;
 }
+/*侧边目录样式*/
 #aside h1{
 	font-size: 24px;
 	cursor: pointer;
@@ -69,8 +74,13 @@ li ul{
 	font-size: 20px;
 	cursor: pointer;
 }
-#aside a{
-	text-decoration: none;
+#aside ol{
+	line-height: 28px;
+	font-size: 18px;
+}
+#aside ul{
+	line-height: 24px;
+	font-size: 16px;
 }
 /*pc端快捷键*/
 .keyboard-pc {
@@ -137,11 +147,11 @@ li ul{
 .h-link {
 	cursor: pointer;
 }
-.content-toc {
-	line-height: 26px;
+.content-top {
+	line-height: 24px;
 	background-color: #CCC;
 	padding: 20px 20px 20px 50px;
 	border-radius: 5px;
 	color: #4682BE;
-	font-size: 18px;
+	font-size: 16px;
 }
