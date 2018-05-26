@@ -12,10 +12,13 @@ function differentiation () {
 	if (isPC()) {//pc端
 		$('#aside').addClass("aside-pc");
 		$('#content').addClass("content-pc");
+		$('#keyboard').addClass("keyboard-pc");
 	} else {//移动端
-		$('#aside').addClass("aside-mobie");
-		var width = $('#aside').width();
-		$('#content').addClass("content-mobie").width(width).css("left",width + 40).hide();
+		var width = $('#aside').addClass("aside-mobie").width();
+		$('#aside').width(width);
+		$('#content').addClass("content-mobie").width(width).css("left", width + 40).hide();
+		$('#keyboard').addClass("keyboard-mobie");
+		$('#full').text("文章");
 	}
 }
 differentiation();
@@ -71,7 +74,8 @@ function articleDirectories() {
 	$('#content h2, #content h3, #content h4').map(function(index) {
 		$(this).html("<span class='h-link'>"+ $(this).html() + "</span>")
 		$(this).attr('id', "h" + index);//替换id
-		$(this).on('click','span',function () {
+		$(this).on('click','span',function (e) {
+			e.preventDefault();
 			$("#content").animate({
 				scrollTop : this.offsetTop
 			}, 300);
@@ -83,7 +87,8 @@ function articleDirectories() {
 		$(this).attr('id', "h2" + "and" + index + "link");
 		var ul_li = $("<li id=" + "h2" + "and" + index + "top" +" class='li-link'>"+ $(this).text() +"</li>");
 		ul_tag.append(ul_li);
-		ul_li.click(function() {
+		ul_li.click(function(e) {
+			e.preventDefault();
 			$("#content").animate({
 				scrollTop : self.offsetTop
 			}, 300);
@@ -98,13 +103,14 @@ function fullScreen() {
 		if($(this).hasClass("show")) {
 			$("#content").show();
 			$(this).addClass("hide").removeClass("show").text("目录");
-			$("#aside").animate({left: -$("#aside").width()-40}, 500);
+			$("#aside").animate({left: -$("#aside").width()-40, right:0}, 500);
 			$("#content").animate({left: 0}, 500);
 		} else {
 			$(this).addClass("show").removeClass("hide").text("全屏");
-			$("#aside").animate({left: 0}, 500);
+			$("#aside").animate({left: 0, right: $("#aside").width()+40}, 500);
 			$("#content").animate({left: $("#aside").width()+40}, 500);
 			if (!environment) {
+				$('#full').text("文章");
 				setTimeout(function() {
 					$("#content").hide();
 				},300)

@@ -3,6 +3,7 @@ html,body{
 	padding: 0;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
 body{
 	position: relative;
@@ -42,6 +43,7 @@ li ul{
 }
 #aside.aside-mobie {
 	right: 0;
+	bottom: 40px;
 }
 #content{
 	overflow-x: hidden;
@@ -57,6 +59,7 @@ li ul{
 }
 #content.content-mobie {
 	padding: 20px;
+	bottom: 40px;
 }
 #aside h1{
 	font-size: 24px;
@@ -69,12 +72,14 @@ li ul{
 #aside a{
 	text-decoration: none;
 }
-#keyboard{
+/*pc端快捷键*/
+.keyboard-pc {
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	margin: auto;
 	right: 30px;
+	height: 203px;
 	line-height: 50px;
 	width: 50px;
 	font-size: 12px;
@@ -84,17 +89,33 @@ li ul{
 	border-radius: 5px;
 	cursor: pointer;
 	overflow: hidden;
-	height: 203px;
 }
-#keyboard .button:hover{
+.keyboard-pc .button:hover{
 	background-color: #999;
 }
-#keyboard .button{
+.keyboard-pc .button{
 	border-top: #999 1px solid;
 }
-#keyboard #top{
+.keyboard-pc #top{
 	border-top: none;
 }
+/*移动端快捷键*/
+.keyboard-mobie {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 40px;
+	display: flex;
+	cursor: pointer;
+	background-color: #ccc;
+}
+.keyboard-mobie .button {
+	flex: 1;
+	line-height: 40px;
+	text-align: center;	
+}
+/*滚动条优化*/
 .scroll::-webkit-scrollbar {
     width: 10px;    
     height: 10px;
@@ -109,6 +130,7 @@ li ul{
     border-radius: 0;
     background: rgba(0,0,0,0.1);
 }
+/*文章样式优化*/
 .li-link {
 	cursor: pointer;
 }
